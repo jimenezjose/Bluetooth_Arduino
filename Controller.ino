@@ -7,7 +7,7 @@ Description:    Button command functions. Button behavior is handled in this
                 file, every function is mapped to a specific button from the 
                 bluetooth controller. 
 ****************************************************************************/
-#include "controller.h"
+#include "Controller.h"
 
 /* Connected in: Controller Mode */
 

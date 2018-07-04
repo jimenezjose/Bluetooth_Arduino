@@ -11,8 +11,8 @@ Description:    This program integrates the HC-06 bluetooth module
 		Controller, Swicth, Dimmer, and Terminal mode.
 ****************************************************************************/
 
-#include "handleInput.h"
-#include "controller.h"
+#include "HandleInput.h"
+#include "Controller.h"
 
 #include <IRremote.h>
 IRsend irsend;
