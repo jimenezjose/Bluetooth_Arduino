@@ -72,7 +72,6 @@ int powerButton() {
 
 /* Connected in: Dimmer Mode */
 
-
 int slideButton() {
 
   return 0; 
