@@ -1,5 +1,5 @@
-#ifndef READINPUT_H /* multiple inclusion guard */
-#define READINPUT_H
+#ifndef HANDLEINPUT_H /* multiple inclusion guard */
+#define HANDLEINPUT_H
 
 #define BT_TX_DELAY 2
 

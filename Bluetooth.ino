@@ -7,15 +7,14 @@
 
 File Name:      Bluetooth.ino
 Description:    This program integrates the HC-06 bluetooth module
-		with the "Arduino Bluetooth Controller" app. Compatible to Controller,
-    Swicth, Dimmer, and Terminal mode.
+		with the "Arduino Bluetooth Controller" app. Compatible to 
+		Controller, Swicth, Dimmer, and Terminal mode.
 ****************************************************************************/
 
 #include "handleInput.h"
 #include "controller.h"
 
 #include <IRremote.h>
-#define BACK    0x62E9
 IRsend irsend;
 
 
@@ -33,7 +32,7 @@ const int ledPin = 3;
 % Return:        Nothing
 ***************************************************************************/
 void setup() {
-  Serial.begin(9600);
+  Serial.begin( 9600 );
   pinMode( ledPin, OUTPUT );
 }
 
@@ -48,8 +47,8 @@ void setup() {
 void loop() {
  if( Serial.available() > 0 ) {
     /* Serial data incoming */
-    populateBuffer( buffer, BUFSIZ );     /* populate buffer BT data */
-    Serial.println( buffer );             /* report command on the serial monitor */
+    populateBuffer( buffer, BUFSIZ ); /* populate buffer BT data */
+    Serial.println( buffer );         /* report command on the serial monitor */
 
     commandFunc = interpretCmd( buffer ); /* interpret button pressed */
     if( commandFunc != NULL ) {

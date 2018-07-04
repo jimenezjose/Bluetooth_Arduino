@@ -1,14 +1,13 @@
 /****************************************************************************
                                                 Jose Jorge Jimenez-Olivas
-                                                CSE 12, Winter Quarter
                                                 June 25, 2018
 
 File Name:      HandleInput.ino
 Description:    Reads Serial data recieved from the bluetooth module and 
                 interprets the serial data into button commands. 
 ****************************************************************************/
-#include "handleInput.h"
-#include "controller.h"
+#include "HandleInput.h"
+#include "Controller.h"
 
 static const char * const COMMANDS_LIST[] = COMMANDS;
 static int (* const button_funcs[])() = CONTROL_FUNCS;
@@ -50,13 +49,14 @@ void populateBuffer( char * buffer, long size ) {
 ***************************************************************************/
 int ( * interpretCmd( char * command ))() {
 
-  int validInt = atoi( buffer ) || buffer[ 0 ] == '0'; /* valid integer conv.*/
-  int stringLen = strlen( command ); /* length of user command string */
+  int validInt = atoi( buffer ) || buffer[ 0 ] == '0';  /* valid integer conv.*/
+  int stringLen = strlen( command );         /* length of user command string */
   int index = 0; 		                       /* commands list index */
 
   while( COMMANDS_LIST[ index ] != NULL ) {
     /* searching for command in list */
     if( strncmp( command, COMMANDS_LIST[ index ], stringLen ) == 0 ) {
+      /* Command found */
       return button_funcs[ index ];
     }
     index++;
