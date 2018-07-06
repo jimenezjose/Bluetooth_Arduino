@@ -24,26 +24,11 @@ int (* commandFunc)();         /* interpreted bluetooth command */
 
 const int ledPin = 3;
 
-/***************************************************************************
-% Routine Name : setup
-% File :         Bluetooth.ino
-% Parameters:    None
-% Description :  Configure arduino peripherals 
-% Return:        Nothing
-***************************************************************************/
 void setup() {
   Serial.begin( 9600 );
   pinMode( ledPin, OUTPUT );
 }
 
-/***************************************************************************
-% Routine Name : loop
-% File :         Bluetooth.ino
-% Parameters:    None
-% Description :  logic driver for interpreting and executing the correct
-%		 button function.
-% Return:        Nothing
-***************************************************************************/
 void loop() {
  if( Serial.available() > 0 ) {
     /* Serial data incoming */
