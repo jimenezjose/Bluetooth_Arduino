@@ -5,7 +5,7 @@
 
                       Arduino bluetooth controller
 
-File Name:      Bluetooth.ino
+File Name:      Bluetooth_Arduino.ino
 Description:    This program integrates the HC-06 bluetooth module
 		with the "Arduino Bluetooth Controller" app. Compatible to 
 		Controller, Swicth, Dimmer, and Terminal mode.
