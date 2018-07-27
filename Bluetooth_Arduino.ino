@@ -11,36 +11,41 @@ Description:    This program integrates the HC-06 bluetooth module
 		Controller, Swicth, Dimmer, and Terminal mode.
 ****************************************************************************/
 
+#include <SoftwareSerial.h>
 #include "HandleInput.h"
 #include "Controller.h"
-
-#include <IRremote.h>
-IRsend irsend;
-
-
 
 char buffer[ BUFSIZ ] = { 0 }; /* user input buffer */
 int (* commandFunc)();         /* interpreted bluetooth command */
 
-const int ledPin = 3;
+SoftwareSerial BT(10, 11);     /* RX, TX */
+const int ledPin = 7;
+const int knobPin = A0;
 
 void setup() {
   Serial.begin( 9600 );
+  BT.begin( 9600 );
   pinMode( ledPin, OUTPUT );
+  pinMode( knobPin, INPUT );
 }
 
 void loop() {
- if( Serial.available() > 0 ) {
-    /* Serial data incoming */
-    populateBuffer( buffer, BUFSIZ ); /* populate buffer BT data */
-    Serial.println( buffer );         /* report command on the serial monitor */
 
-    commandFunc = interpretCmd( buffer ); /* interpret button pressed */
+  if( BT.available() > 0 ) {
+    /* incomming Bluetooth data */
+    populateBuffer( buffer, BUFSIZ );              /* populate buffer BT data */
+    Serial.println( buffer );         /* report command on the serial monitor */
+    commandFunc = interpretCmd( buffer );         /* interpret button pressed */
     if( commandFunc != NULL ) {
       /* valid button comand - execute button function */
       commandFunc();
     }
+  }
 
+  if( Serial.available() > 0 ) {
+    /* Bluetooth communication */
+    String message = getMessage();
+    sendMessage( message );
   }
   
 }

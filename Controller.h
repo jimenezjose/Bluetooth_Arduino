@@ -5,9 +5,9 @@
 #define MIN_DIM 0
 
 #define CONTROL_FUNCS { button_up, button_down,  button_left, button_right,\
-			                  button_select, button_start, button_triangle, \
-			                  button_square, button_o, button_x, powerButton, \
-			                  powerButton, NULL }
+                        button_select, button_start, button_triangle, \
+                        button_square, button_o, button_x, powerButton, \
+                        powerButton, NULL }
 
 /* Controller Mode */
 int button_up();

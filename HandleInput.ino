@@ -27,9 +27,9 @@ void populateBuffer( char * buffer, long size ) {
   int index; /* buffer index */
 
   index = 0;
-  while( Serial.available() > 0 && index < size - 1 ) {
-    /* populate buffer with bluetooth data*/
-    buffer[ index ] = toLowerCase( Serial.read() );
+  while( BT.available() > 0 && index < size - 1 ) {
+    /* populate buffer with bluetooth data */
+    buffer[ index ] = toLowerCase( BT.read() );
     index++;
     delay( BT_TX_DELAY );
   }
@@ -51,7 +51,7 @@ int ( * interpretCmd( char * command ))() {
 
   int validInt = atoi( buffer ) || buffer[ 0 ] == '0';  /* valid integer conv.*/
   int stringLen = strlen( command );         /* length of user command string */
-  int index = 0; 		                       /* commands list index */
+  int index = 0;                                       /* commands list index */
 
   while( COMMANDS_LIST[ index ] != NULL ) {
     /* searching for command in list */
@@ -69,3 +69,36 @@ int ( * interpretCmd( char * command ))() {
 
   return NULL;
 }
+
+/***************************************************************************
+% Routine Name : getMessage
+% File :         HandleInput.ino
+% Parameters:    None
+% Description :  Interprets buffered bytes from serial monitor as message 
+%                characters
+% Return:        Message from Serial monitor
+***************************************************************************/
+String getMessage() {
+  String message = "";
+
+  while( Serial.available() > 0 ) {
+    /* populating string with Serial data */
+    message += (char) Serial.read();
+    delay( BT_TX_DELAY );
+  }
+
+  return message;
+}
+
+/***************************************************************************
+% Routine Name : sendMessage
+% File :         HandleInput.ino
+% Parameters:    message: character string to send
+% Description :  send a character string to bluetooth linked device
+% Return:        Nothing 
+***************************************************************************/
+void sendMessage( String message ) {
+    BT.print( message );
+    Serial.print( "> " + message ); 
+}
+
